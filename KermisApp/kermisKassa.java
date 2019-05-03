@@ -10,6 +10,8 @@ public class kermisKassa {
 	static double OmzetSpook;
 	static double OmzetHawaii;
 	static double OmzetLadder;
+	static double BelastingBetaler;
+	
 	
 	static int alleBotsKaartjes;
 	static int alleSpinKaartjes;
@@ -18,6 +20,8 @@ public class kermisKassa {
 	static int alleHawaiiKaartjes;
 	static int alleLadderKaartjes;
 	static int alleKaartjes;
+	
+//	static double naBelast;
 	
 	
 	void KassaTelling() {
@@ -55,9 +59,8 @@ public class kermisKassa {
 					System.out.println("Koop zonnebrand met " + OmzetHawaii + " euro uit Hawaii,");
 					System.out.println("En ze probeerde voor " + OmzetLadder + " euro die verrekte ladder op te komen... \n");
 					System.out.println("Dat was de totale omzet van vandaag! \n");
-					System.out.println("Voor de belastingdienst: ");
-					kansSpelBelasting();
-					System.out.println(" ");
+					System.out.println("Er is totaal " + ((OmzetLadder*0.30)-BelastingBetaler) + " euro aan de Geldrover betaald");
+					System.out.println("Er staat nog " + BelastingBetaler + " euro gereserveerd voor de Geldrover \n");
 				}
 				else {
 					System.out.println("Er is helaas geen omzet gedraaid vandaag... \n");
@@ -73,7 +76,5 @@ public class kermisKassa {
 	
 	void kansSpelBelasting() {
 		double gokLadder = OmzetLadder*0.30;
-		System.out.println("Het gereserveerde geld voor de Geldrover is: " + gokLadder + " euro.");
-		
 	}
 }

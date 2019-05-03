@@ -42,7 +42,7 @@ public class KermisMain {
 				kas.KassaTelling();
 				break;
 			case "n":
-				System.out.println("U wilt stoppen met het tellen van de kaartjes of het uitrekenen van de omzet. \n");	
+				System.out.println("U wilt stoppen met het tellen en gaat lekker naar huis. \n");	
 				kassaJa = false;
 				break;
 			default: 

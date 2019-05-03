@@ -25,9 +25,12 @@ class Attractie {
 		while (ride) {
 			john.langskomen();
 			if (john.b == 3) {
-				System.out.println("!! De belastingInspecteur staat op uw stoep!!");
-				System.out.println("********************************************* \n");
+				System.out.println("*!! De belastingInspecteur staat op uw stoep!!*");
 				kassa.kansSpelBelasting();
+				omhoog.belastingBetaal();
+				System.out.println("*********************************************** \n");
+				System.out.println(" ");
+				omhoog.ladderKaartB = 0;
 			}
 
 			System.out.println("Kies een getal tussen 1 en 6:");
@@ -71,6 +74,7 @@ class Attractie {
 			case "6":
 				System.out.println("De attractie " + omhoog.naam + " hangt voor u klaar! \n");
 				omhoog.ladderKaart = omhoog.ladderKaart +1;
+				omhoog.ladderKaartB = omhoog.ladderKaartB+1;
 				ride = false;
 				break;
 				
@@ -94,7 +98,7 @@ class Attractie {
 		kassa.OmzetHawaii = kassa.alleHawaiiKaartjes * zonnig.hawaiiPrijs;
 		kassa.OmzetLadder = kassa.alleLadderKaartjes * omhoog.ladderPrijs;
 		kassa.omzetTotaal = kassa.OmzetBots + kassa.OmzetSpin + kassa.OmzetSpiegel + kassa.OmzetSpook + kassa.OmzetHawaii + kassa.OmzetLadder;
-	
+		kassa.BelastingBetaler = omhoog.ladderKaartB;
 	}
 
 }
@@ -147,5 +151,11 @@ class Ladderklimmen extends Attractie {
 	double oppervlakte = 2*3;
 	static double ladderPrijs = 5.00;
 	static int ladderKaart = 0;
-//	double gokLadder = ladderPrijs*0.30;
+	static double ladderKaartB = 0;
+	
+	void belastingBetaal() {
+		double Bet = (ladderKaartB * ladderPrijs) *0.30;
+		System.out.println("U moet " + Bet + " euro dokken.");
+	}
+	
 }
