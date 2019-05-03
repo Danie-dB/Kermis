@@ -39,10 +39,10 @@ public class KermisMain {
 			checkKassa = checkKassa.toLowerCase();
 			switch (checkKassa) {
 			case "j": 
-				joy.KassaTelling();
+				kas.KassaTelling();
 				break;
 			case "n":
-				System.out.println("U wilt stoppen met het tellen van de kaartjes of de omzet. \n");	
+				System.out.println("U wilt stoppen met het tellen van de kaartjes of het uitrekenen van de omzet. \n");	
 				kassaJa = false;
 				break;
 			default: 

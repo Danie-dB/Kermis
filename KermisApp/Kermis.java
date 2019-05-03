@@ -1,6 +1,7 @@
 
 package KermisApp;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Kermis {
@@ -18,8 +19,17 @@ class Attractie {
 		Hawaii zonnig = new Hawaii();
 		Ladderklimmen omhoog = new Ladderklimmen();
 		kermisKassa kassa = new kermisKassa();
+		kermisControleurs sjaak = new kermisControleurs();
+		BelastingInspecteur john = new BelastingInspecteur();
 		
 		while (ride) {
+			john.langskomen();
+			if (john.b == 3) {
+				System.out.println("!! De belastingInspecteur staat op uw stoep!!");
+				System.out.println("********************************************* \n");
+				kassa.kansSpelBelasting();
+			}
+
 			System.out.println("Kies een getal tussen 1 en 6:");
 			Scanner scanner = new Scanner(System.in);
 			String keuze = scanner.nextLine();
@@ -33,6 +43,8 @@ class Attractie {
 			case "2":
 				System.out.println("De attractie " + draaierig.naam + " draait! \n");
 				draaierig.spinKaart = draaierig.spinKaart +1;
+				draaierig.keuringSpin = draaierig.spinKaart;
+				sjaak.spinKeuring();
 				ride = false;
 				break;
 				
@@ -51,7 +63,9 @@ class Attractie {
 			case "5":
 				System.out.println("U gaat naar het zonnige " + zonnig.naam + "! \n");
 				zonnig.hawaiiKaart = zonnig.hawaiiKaart +1;
-				ride = false;
+				zonnig.keuringHawaii = zonnig.hawaiiKaart;
+				sjaak.hawaaiKeuring();
+				ride = false; 
 				break;
 				
 			case "6":
@@ -82,54 +96,7 @@ class Attractie {
 		kassa.omzetTotaal = kassa.OmzetBots + kassa.OmzetSpin + kassa.OmzetSpiegel + kassa.OmzetSpook + kassa.OmzetHawaii + kassa.OmzetLadder;
 	
 	}
-	
-	void KassaTelling() {
-		boolean telling = true;
-		while (telling) {
-			System.out.println("Wilt u de omzet weten (o) of het aantal verkocht kaartjes (k)?");
-			Scanner scanner = new Scanner(System.in);
-			String kastelling = scanner.nextLine();
-			kastelling = kastelling.toLowerCase();
-			
-			switch (kastelling) {
-			case "k":
-				if (kermisKassa.alleKaartjes > 0) {
-					System.out.println("Er zijn vandaag in totaal " + kermisKassa.alleKaartjes + " kaartjes verkocht: \n");
-					System.out.println(kermisKassa.alleBotsKaartjes + " voor de botsauto's,");
-					System.out.println(kermisKassa.alleSpinKaartjes + " voor de Spin,");
-					System.out.println(kermisKassa.alleSpiegelKaartjes + " van het Spiegelhuis,");
-					System.out.println(kermisKassa.alleSpookKaartjes + " van het Griezelhuis,");
-					System.out.println(kermisKassa.alleHawaiiKaartjes + " voor het zonnige Hawaii,");
-					System.out.println("And last but not least: " + kermisKassa.alleLadderKaartjes + " kaartjes om de ladder op te komen. \n");
-				       }
-				else {
-					System.out.println("Er zijn vandaag geen kaartjes verkocht helaas... \n");
-				}
-					
-				telling = false;
-				break;
-			case "o":
-				if (kermisKassa.omzetTotaal > 0 ) {
-					System.out.println("De gedraaide omzet bedraagt " + kermisKassa.omzetTotaal + " euro. \n");
-					System.out.println("Er is " + kermisKassa.OmzetBots + " euro verdient met de botsauto's,");
-					System.out.println(kermisKassa.OmzetSpin + " euro met de Spin,");
-					System.out.println("Het spiegeleffect leverde " + kermisKassa.OmzetSpiegel + " euro op,");
-					System.out.println(kermisKassa.OmzetSpook + " euro om van te griezelen,");
-					System.out.println("Koop zonnebrand met " + kermisKassa.OmzetHawaii + " euro uit Hawaii,");
-					System.out.println("En ze probeerde voor " + kermisKassa.OmzetLadder + " euro die verrekte ladder op te komen... \n");
-					System.out.println("Dat was de totale omzet van vandaag! \n");
-				}
-				else {
-					System.out.println("Er is helaas geen omzet gedraaid vandaag... \n");
-				}
-				telling = false;
-				break;
-			default:
-				System.out.println("kies geldige invoer: 'k' of 'o'.");
-				break;
-			}
-		}
-	}
+
 }
 
 class Botsautos extends Attractie {
@@ -146,6 +113,7 @@ class Spin extends Attractie {
 	double oppervlakte = 4*6;
 	static double spinPrijs = 2.25;
 	static int spinKaart = 0;
+	static int keuringSpin = 5;
 }
 
 class Spiegelpaleis extends Attractie {
@@ -170,6 +138,7 @@ class Hawaii extends Attractie {
 	double oppervlakte = 3*4;
 	static double hawaiiPrijs = 2.90;
 	static int hawaiiKaart = 0;
+	static int keuringHawaii = 10;
 }
 
 class Ladderklimmen extends Attractie {
@@ -178,4 +147,5 @@ class Ladderklimmen extends Attractie {
 	double oppervlakte = 2*3;
 	static double ladderPrijs = 5.00;
 	static int ladderKaart = 0;
+//	double gokLadder = ladderPrijs*0.30;
 }
