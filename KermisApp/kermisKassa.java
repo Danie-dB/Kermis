@@ -1,6 +1,8 @@
 package KermisApp;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
+import java.math.RoundingMode;
 
 public class kermisKassa {
 	static double omzetTotaal;
@@ -10,8 +12,12 @@ public class kermisKassa {
 	static double OmzetSpook;
 	static double OmzetHawaii;
 	static double OmzetLadder;
-	static double BelastingBetaler;
 	
+	static double BelastingBetaler;
+	static double BelastingSpin;
+	
+
+	final static DecimalFormat dF = new DecimalFormat("##,##");
 	
 	static int alleBotsKaartjes;
 	static int alleSpinKaartjes;
@@ -20,9 +26,6 @@ public class kermisKassa {
 	static int alleHawaiiKaartjes;
 	static int alleLadderKaartjes;
 	static int alleKaartjes;
-	
-//	static double naBelast;
-	
 	
 	void KassaTelling() {
 		boolean telling = true;
@@ -36,7 +39,7 @@ public class kermisKassa {
 			case "k":
 				if (kermisKassa.alleKaartjes > 0) {
 					System.out.println("Er zijn vandaag in totaal " + alleKaartjes + " kaartjes verkocht: \n");
-					System.out.println(alleBotsKaartjes + " voor de botsauto's,");
+					System.out.println(alleBotsKaartjes+ " voor de botsauto's,");
 					System.out.println(alleSpinKaartjes + " voor de Spin,");
 					System.out.println(alleSpiegelKaartjes + " van het Spiegelhuis,");
 					System.out.println(alleSpookKaartjes + " van het Griezelhuis,");
@@ -45,28 +48,38 @@ public class kermisKassa {
 				       }
 				else {
 					System.out.println("Er zijn vandaag geen kaartjes verkocht helaas... \n");
-				}
-					
+				}	
 				telling = false;
 				break;
+				
 			case "o":
 				if (kermisKassa.omzetTotaal > 0 ) {
 					System.out.println("De gedraaide omzet bedraagt " + omzetTotaal + " euro. \n");
-					System.out.println("Er is " + OmzetBots + " euro verdient met de botsauto's,");
-					System.out.println(OmzetSpin + " euro met de Spin,");
-					System.out.println("Het spiegeleffect leverde " + OmzetSpiegel + " euro op,");
-					System.out.println(OmzetSpook + " euro om van te griezelen,");
-					System.out.println("Koop zonnebrand met " + OmzetHawaii + " euro uit Hawaii,");
-					System.out.println("En ze probeerde voor " + OmzetLadder + " euro die verrekte ladder op te komen... \n");
-					System.out.println("Dat was de totale omzet van vandaag! \n");
-					System.out.println("Er is totaal " + ((OmzetLadder*0.30)-BelastingBetaler) + " euro aan de Geldrover betaald");
-					System.out.println("Er staat nog " + BelastingBetaler + " euro gereserveerd voor de Geldrover \n");
+					System.out.println("Er is " + dF.format(OmzetBots) + " euro verdient met de botsauto's,");
+					System.out.println(dF.format(OmzetSpin) + " euro met de Spin,");
+					System.out.println("Het spiegeleffect leverde " + dF.format(OmzetSpiegel) + " euro op,");
+					System.out.println(dF.format(OmzetSpook) + " euro om van te griezelen,");
+					System.out.println("Koop zonnebrand met " + dF.format(OmzetHawaii) + " euro uit Hawaii,");
+					System.out.println("En ze probeerde voor " + dF.format(OmzetLadder) + " euro die verrekte ladder op te komen... \n");
+					
+					OmzetLadder = OmzetLadder*0.30;
+					BelastingBetaler = (BelastingBetaler*5) * 0.30;
+					OmzetLadder = OmzetLadder - BelastingBetaler;
+					
+					OmzetSpin = OmzetSpin*0.30;
+					BelastingSpin = (BelastingSpin*5) *0.30;
+					OmzetSpin = OmzetSpin - BelastingSpin;
+					
+					System.out.println("Er is al " + dF.format(OmzetSpin) +  " euro betaald aan de Geldrover voor de Spin.");
+					System.out.println("Er is in totaal " + dF.format(OmzetLadder) + " euro aan de Geldrover betaald voor de ladder.");
+					System.out.println("Er staat in totaal nog " + dF.format(BelastingBetaler + BelastingSpin) + " euro gereserveerd voor de Geldrover \n");
 				}
 				else {
 					System.out.println("Er is helaas geen omzet gedraaid vandaag... \n");
 				}
 				telling = false;
 				break;
+				
 			default:
 				System.out.println("kies geldige invoer: 'k' of 'o'.");
 				break;
@@ -76,5 +89,6 @@ public class kermisKassa {
 	
 	void kansSpelBelasting() {
 		double gokLadder = OmzetLadder*0.30;
+		double gokSpin = OmzetSpin*0.30;
 	}
 }

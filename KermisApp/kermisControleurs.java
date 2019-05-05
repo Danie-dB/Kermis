@@ -24,6 +24,7 @@ public class kermisControleurs {
 		}
 }
 
+
 class BelastingInspecteur {
 	int b;
 	int langskomen() {

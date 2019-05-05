@@ -3,6 +3,8 @@ package KermisApp;
 
 import java.util.Random;
 import java.util.Scanner;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 public class Kermis {
 	Attractie nr = new Attractie();
@@ -28,9 +30,11 @@ class Attractie {
 				System.out.println("*!! De belastingInspecteur staat op uw stoep!!*");
 				kassa.kansSpelBelasting();
 				omhoog.belastingBetaal();
+				draaierig.belastingBetaalSpin();
 				System.out.println("*********************************************** \n");
 				System.out.println(" ");
 				omhoog.ladderKaartB = 0;
+				draaierig.spinKaartB = 0;
 			}
 
 			System.out.println("Kies een getal tussen 1 en 6:");
@@ -48,6 +52,7 @@ class Attractie {
 				draaierig.spinKaart = draaierig.spinKaart +1;
 				draaierig.keuringSpin = draaierig.spinKaart;
 				sjaak.spinKeuring();
+				draaierig.spinKaartB = draaierig.spinKaartB +1;
 				ride = false;
 				break;
 				
@@ -99,8 +104,8 @@ class Attractie {
 		kassa.OmzetLadder = kassa.alleLadderKaartjes * omhoog.ladderPrijs;
 		kassa.omzetTotaal = kassa.OmzetBots + kassa.OmzetSpin + kassa.OmzetSpiegel + kassa.OmzetSpook + kassa.OmzetHawaii + kassa.OmzetLadder;
 		kassa.BelastingBetaler = omhoog.ladderKaartB;
+		kassa.BelastingSpin = draaierig.spinKaartB;
 	}
-
 }
 
 class Botsautos extends Attractie {
@@ -117,7 +122,14 @@ class Spin extends Attractie {
 	double oppervlakte = 4*6;
 	static double spinPrijs = 2.25;
 	static int spinKaart = 0;
+	static int spinKaartB = 0;
 	static int keuringSpin = 5;
+	static DecimalFormat df2 = new DecimalFormat("##,##");
+	
+	void belastingBetaalSpin() {
+		double Bet = (spinKaartB * spinPrijs) *0.30;
+		System.out.println("U moet " + df2.format(Bet) + " euro dokken voor de Spin.");
+	}
 }
 
 class Spiegelpaleis extends Attractie {
@@ -155,7 +167,7 @@ class Ladderklimmen extends Attractie {
 	
 	void belastingBetaal() {
 		double Bet = (ladderKaartB * ladderPrijs) *0.30;
-		System.out.println("U moet " + Bet + " euro dokken.");
+		System.out.println("U moet " + Bet + " euro dokken voor de Ladder.");
 	}
 	
 }

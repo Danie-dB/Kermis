@@ -47,11 +47,7 @@ public class KermisMain {
 				break;
 			default: 
 				System.out.println("Kies een geldige invoer.");
-				
 			}
 		}
-		
-		
 	}
-
 }
